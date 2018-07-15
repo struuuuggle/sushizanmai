@@ -25,7 +25,7 @@ var svgSpeed = d3.select(".speed").append("svg")/* '.type'でtypeクラスの要
                   "translate(" + margin.left + "," + margin.top + ")");
 
 // Load the data
-d3.csv("../data/score.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.csv").then(function(data) {
 
     /* format the data */
     data.forEach(function(d) {

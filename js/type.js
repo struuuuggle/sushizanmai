@@ -25,7 +25,7 @@ var svgType = d3.select(".type").append("svg")
                   "translate(" + margin.left + "," + margin.top + ")");
 
 // データ読み込み
-d3.csv("../data/score.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.csv").then(function(data) {
 
     /* format the data */
     data.forEach(function(d) {
