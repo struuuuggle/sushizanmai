@@ -1,0 +1,13 @@
+/* style.css */
+
+/* 折れ線グラフの線 */
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 3;
+}
+
+.contribution svg {
+    margin-left: 64px;
+    margin-right: 64px;
+}

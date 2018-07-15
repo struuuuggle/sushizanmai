@@ -1,0 +1,3 @@
+[submodule "lib/calendar-heatmap"]
+	path = lib/calendar-heatmap
+	url = https://github.com/DKirwan/calendar-heatmap.git
