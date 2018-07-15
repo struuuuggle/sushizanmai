@@ -13,8 +13,9 @@ var y = d3.scaleLinear().range([height, 0]);
 
 /* line */
 var lineSpeed = d3.line()
-             .x(function(d) { return x(d.date); })
-             .y(function(d) { return y(d.speed); })
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.speed); })
+    .curve(d3.curveStepBefore);
 
 /* Generate svg */
 var svgSpeed = d3.select(".speed").append("svg")/* '.type'でtypeクラスの要素を指定 */

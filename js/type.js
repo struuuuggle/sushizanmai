@@ -14,7 +14,8 @@ var y = d3.scaleLinear().range([height, 0]);
 /* line */
 var lineType = d3.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.type); });
+    .y(function(d) { return y(d.type); })
+    .curve(d3.curveStepBefore);
 
 /* Generate svg */
 var svgType = d3.select(".type").append("svg")
