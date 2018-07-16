@@ -14,7 +14,7 @@ var y = d3.scaleLinear().range([height, 0]);
 /* line */
 var lineMiss = d3.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.miss); });
+    .y(function(d) { return y(d.miss); })
     .curve(d3.curveStepBefore); // Step(始点)
 
 /* Generate svg */
