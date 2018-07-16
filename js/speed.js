@@ -41,16 +41,16 @@ d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.
 
    // Add the X Axis
     svgSpeed.append("g")
-       .attr("transform", "translate(0," + height + ")")
-       .call(d3.axisBottom(x));
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
    // Add the Y Axis
     svgSpeed.append("g")
-       .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y));
 
     /* Draw the line */
     svgSpeed.append("path")
-       .datum(data)
+        .datum(data)
        .attr("class", "line")
        .attr("d", lineSpeed);
 });

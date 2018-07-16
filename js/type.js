@@ -41,12 +41,12 @@ d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.
 
    // Add the X Axis
     svgType.append("g")
-       .attr("transform", "translate(0," + height + ")")
-       .call(d3.axisBottom(x));
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
    // Add the Y Axis
     svgType.append("g")
-       .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y));
 
     /* Draw the line */
     svgType.append("path")
