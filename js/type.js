@@ -37,7 +37,7 @@ d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.
     /* Scale the range of the data */
     /* y.domain: [ymin, ymax] */
     x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain([0, d3.max(data, function(d) { return d.type; })]);
+    y.domain([500, d3.max(data, function(d) { return d.type; })]);
 
    // Add the X Axis
     svgType.append("g")
