@@ -1,7 +1,7 @@
 // contribution.js
 // contribution visualizer
 
-d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/struuuuggle/sushizanmai/master/dat/score.csv").then(function(data) {
     var dict = {};
     data.forEach(function(d) {
         if(!(d.date in dict)) dict[d.date] = 1;

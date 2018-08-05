@@ -26,7 +26,7 @@ var svgMiss = d3.select(".miss").append("svg")
                   "translate(" + margin.left + "," + margin.top + ")");
 
 // Load the data
-d3.csv("https://raw.githubusercontent.com/struuuuggle/sushida/master/data/score.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/struuuuggle/sushizanmai/master/dat/score.csv").then(function(data) {
     /* format the data */
     data.forEach(function(d) {
         d.date = parseTime(d.date);
