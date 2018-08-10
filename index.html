@@ -10,12 +10,15 @@
     <body>
         <h1>寿司打(10000円コース)の記録</h1>
         <a href="#" class="cheer_btn">応援する</a>
-        <h2>総タイプ数</h2>
+        <h2>総タイプ数(type)</h2>
         <div class="type"></div>
-        <h2>タイピング速度</h2>
+        <h2>タイピング速度(speed)</h2>
         <div class="speed"></div>
-        <h2>ミスタイプ数</h2>
+        <h2>ミスタイプ数(miss)</h2>
         <div class="miss"></div>
+        <h2>スコア（β版)</h2>
+        <p>(スコア) =  0.01 * (type - miss) * speed</p>
+        <div class="score"></div>
         <h2>挑戦回数</h2>
         <div class="contribution"></div>
 
@@ -33,5 +36,6 @@
     <script src="./js/type.js"></script>
     <script src="./js/speed.js"></script>
     <script src="./js/miss.js"></script>
+    <script src="./js/score.js"></script>
     <script src="./js/contribution.js"></script>
 </html>
