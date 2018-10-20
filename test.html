@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>寿司打の記録(10000円コース)</title>
+    </head>
+
+    <body>
+        <div class="score"></div>
+
+    </body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script>
+        var data = [
+        {"number":  4, "name": "Locke"},
+        {"number":  8, "name": "Reyes"},
+        {"number": 15, "name": "Ford"},
+        {"number": 16, "name": "Jarrah"},
+        {"number": 23, "name": "Shephard"},
+        {"number": 42, "name": "Kwon"}
+        ];
+
+     var arcs = d3.pie()
+                  .value(function(d) { return d.number; })     (data);
+
+
+    </script>
+</html>
