@@ -2,38 +2,94 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>sushizammai</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="./lib/calendar-heatmap/src/calendar-heatmap.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
 
     <body>
-        <h1>寿司打(10000円コース)の記録</h1>
-        <a href="https://twitter.com/struuuuggle">@struuuuggle</a>が更新をサボっていたら、ツイートして発破かけてやってください。<br>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="@struuuuggle 最近寿司打サボってるみたいですね！そろそろ寿司打やらないと指が鈍りますよ！" data-related="struuuuggle" data-hashtags='sushizanmai' data-size="large">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        <h2>総タイプ数(type)</h2>
-        <div class="type"></div>
-        <h2>タイピング速度(speed)</h2>
-        <div class="speed"></div>
-        <h2>ミスタイプ数(miss)</h2>
-        <div class="miss"></div>
-        <h2>スコア（β版)</h2>
-        <p>(スコア) =  0.01 * (type - miss) * speed</p>
-        <div class="score"></div>
-        <h2>挑戦回数</h2>
-        <div class="contribution"></div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">sushizanmai</a>
 
-        <footer>
-            <p><a href="http://typing.sakura.ne.jp/sushida/index.html">寿司打</a></p>
-            <p><a href="https://github.com/struuuuggle/sushizanmai">src repo.</a></p>
-            <p><a href="https://github.com/struuuuggle">Go to struuuuggle@GitHub</a></p>
-            <p>Copyright 2018</p>
-        </footer>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#type-graph">Type</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#speed-graph">Speed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#miss-graph">Miss</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#contribution">Contribution</a>
+                        </li>
+                    </ul>
+                </div><!-- END: navbarNav -->
+
+
+            </div><!-- END: container -->
+        </nav>
+
+
+
+        <div class="container">
+            <div align='center'>
+                <h2 >寿司打(10000円コース)の記録</h2>
+                <a href="https://twitter.com/struuuuggle">@struuuuggle</a>が更新をサボっていたら、Tweetで発破かけてやってください。<br>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-text="@struuuuggle 最近寿司打サボってるみたいですね！そろそろ寿司打やらないと指が鈍りますよ！" data-related="struuuuggle" data-hashtags='sushizanmai' data-size="large">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <div class="type" id="type-graph">
+                <h3>総タイプ数(type)</h3>
+            </div>
+
+            <div class="speed" id="speed-graph">
+                <h3>タイピング速度(speed)</h3>
+            </div>
+
+            <div class="miss" id="miss-graph">
+                <h3>ミスタイプ数(miss)</h3>
+            </div>
+
+            <div class="score" id="score-graph">
+                <h3>スコア（β版)</h3>
+                <p>(スコア) =  0.01 * (type - miss) * speed</p>
+            </div>
+
+            <div class="contribution" id="contribution">
+                <h3>挑戦回数</h3>
+            </div>
+
+            <footer>
+                <p>
+                    <img src="./img/bn.gif">
+                </p>
+                <p>
+                    <a class="github-button" href="https://github.com/struuuuggle" data-size="large" aria-label="Follow @struuuuggle on GitHub">Follow @struuuuggle</a>
+                </p>
+            </footer>
+        </div>
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </body>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="./lib/calendar-heatmap/src/calendar-heatmap.js"></script>
     <script src="./js/type.js"></script>
     <script src="./js/speed.js"></script>
