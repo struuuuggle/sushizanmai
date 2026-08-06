@@ -24,8 +24,13 @@
               height = 500;
 
         /* axis */
-        const x = d3.scaleTime().range([0, width]);
+        const x = d3.scaleLinear().range([0, width]);
         const y = d3.scaleLinear().range([height, 0]);
+
+        // Keep only integer ticks so zooming never shows fractional indices
+        const xAxis = (scale) => d3.axisBottom(scale)
+            .tickValues(scale.ticks().filter(Number.isInteger))
+            .tickFormat(d3.format("d"));
 
         // x scale reflecting the current zoom transform
         let zx = x;
@@ -53,23 +58,24 @@
         d3.csv("./data/score.csv").then(function (data) {
 
             /* format the data */
-            data.forEach(function (d) {
+            data.forEach(function (d, i) {
                 d.date = parseTime(d.date);
+                d.index = i + 1; // CSV line number minus the header line
                 d.value = config.value(d);
             });
 
             /* Scale the range of the data, padded slightly beyond the
                extremes so dots on the edges aren't clipped by the plot area */
-            const [minDate, maxDate] = d3.extent(data, (d) => d.date);
-            const xPad = (maxDate - minDate) * 0.01;
-            x.domain([new Date(minDate - xPad), new Date(+maxDate + xPad)]);
+            const [minIndex, maxIndex] = d3.extent(data, (d) => d.index);
+            const xPad = (maxIndex - minIndex) * 0.01;
+            x.domain([minIndex - xPad, maxIndex + xPad]);
             const [yMin, yMax] = config.yDomain(data.map((d) => d.value));
             y.domain([yMin, yMax + (yMax - yMin) * 0.02]);
 
             // Add the X Axis
             const xAxisG = svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+                .call(xAxis(x));
 
             // Add the Y Axis
             svg.append("g")
@@ -81,7 +87,7 @@
                 .join("circle")
                 .attr("class", "dot")
                 .attr("r", 3.5)
-                .attr("cx", (d) => x(d.date))
+                .attr("cx", (d) => x(d.index))
                 .attr("cy", (d) => y(d.value));
 
             /* Tooltip (SVG-based: the container div clips absolutely
@@ -92,26 +98,30 @@
             const tooltipRect = tooltip.append("rect")
                 .attr("rx", 4);
             const tooltipDate = tooltip.append("text").attr("class", "tooltip-text");
+            const tooltipIndex = tooltip.append("text").attr("class", "tooltip-text");
             const tooltipValue = tooltip.append("text").attr("class", "tooltip-text");
 
             dots.on("mouseover", function (event, d) {
                 tooltipDate.text(formatDate(d.date));
+                tooltipIndex.text("No. " + d.index);
                 tooltipValue.text(config.format(d.value));
                 tooltip.style("display", null);
 
-                // Size the background to the wider of the two lines
+                // Size the background to the widest of the three lines
                 const dateBox = tooltipDate.node().getBBox();
+                const indexBox = tooltipIndex.node().getBBox();
                 const valueBox = tooltipValue.node().getBBox();
                 const lineHeight = 16, padX = 8, padY = 6;
-                const boxW = Math.max(dateBox.width, valueBox.width) + padX * 2;
-                const boxH = lineHeight * 2 + padY * 2;
+                const boxW = Math.max(dateBox.width, indexBox.width, valueBox.width) + padX * 2;
+                const boxH = lineHeight * 3 + padY * 2;
 
                 tooltipDate.attr("x", padX).attr("y", padY + lineHeight - 4);
-                tooltipValue.attr("x", padX).attr("y", padY + lineHeight * 2 - 4);
+                tooltipIndex.attr("x", padX).attr("y", padY + lineHeight * 2 - 4);
+                tooltipValue.attr("x", padX).attr("y", padY + lineHeight * 3 - 4);
                 tooltipRect.attr("width", boxW).attr("height", boxH);
 
                 // Place above the dot, clamped into the plot area
-                const cx = zx(d.date), cy = y(d.value);
+                const cx = zx(d.index), cy = y(d.value);
                 const tx = Math.max(0, Math.min(width - boxW, cx - boxW / 2));
                 let ty = cy - boxH - 10;
                 if (ty < 0) ty = cy + 10; // flip below near the top edge
@@ -134,8 +144,8 @@
                 })
                 .on("zoom", (event) => {
                     zx = event.transform.rescaleX(x);
-                    xAxisG.call(d3.axisBottom(zx));
-                    dots.attr("cx", (d) => zx(d.date));
+                    xAxisG.call(xAxis(zx));
+                    dots.attr("cx", (d) => zx(d.index));
                     tooltip.style("display", "none");
                 });
 
