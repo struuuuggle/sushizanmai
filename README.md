@@ -2,7 +2,7 @@
 
 - You can see my typing skill improving.
 
-See also [寿司打 (Sushida)](http://typing.sakura.ne.jp/sushida/index.html), one of the most famous typing games in Japan.
+See also [寿司打 (Sushida)](https://sushida.net/), one of the most famous typing games in Japan.
 
 ## Setup
 
