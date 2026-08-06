@@ -1,2 +1,7 @@
 CLAUDE.md
 node_modules/
+
+# Build artifacts (built in CI by the Pages deploy workflow)
+css/style.css
+js/vendor/
+tmp/
