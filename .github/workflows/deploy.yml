@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir -p dist
           cp index.html dist/
-          cp -r css js data images dist/
+          cp -r css js data dist/
 
       - uses: actions/configure-pages@v6
 
