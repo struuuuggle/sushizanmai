@@ -1,23 +1,93 @@
 @import "tailwindcss";
 
-/* Preflight turns iframes into block elements; keep the Twitter share
-   button inline so text-center on its parent still centers it */
-iframe.twitter-share-button {
-    display: inline-block;
+/* Design tokens: role-based colors for the page and charts.
+   Light values are the default; dark values follow the OS setting
+   (no manual toggle). D3-generated SVG is styled with plain CSS,
+   and the HTML references these via Tailwind's bg-(--token) syntax. */
+:root {
+    color-scheme: light dark;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-secondary: #52514e;
+    --ink-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --nav-bg: rgba(249, 249, 247, 0.85);
+    --series-type: #2a78d6;
+    --series-speed: #eb6834;
+    --series-miss: #1baf7a;
+    --tooltip-bg: rgba(11, 11, 11, 0.92);
+    --tooltip-text: #fcfcfb;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page: #0d0d0d;
+        --surface: #1a1a19;
+        --ink: #ffffff;
+        --ink-secondary: #c3c2b7;
+        --ink-muted: #898781;
+        --grid: #2c2c2a;
+        --axis: #383835;
+        --border: rgba(255, 255, 255, 0.10);
+        --nav-bg: rgba(13, 13, 13, 0.85);
+        --series-type: #3987e5;
+        --series-speed: #d95926;
+        --series-miss: #199e70;
+        --tooltip-bg: #2c2c2a;
+        --tooltip-text: #ffffff;
+    }
+}
+
+body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Charts render in a fixed 1030x550 viewBox; scale to the card width */
+.chart-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Per-chart series color, resolved by .dot via var(--series) */
+.type  { --series: var(--series-type); }
+.speed { --series: var(--series-speed); }
+.miss  { --series: var(--series-miss); }
+
+/* Recessive chart chrome: hairline gridlines, muted axis ink */
+.grid line {
+    stroke: var(--grid);
+    shape-rendering: crispEdges;
+}
+
+.axis .domain,
+.axis .tick line {
+    stroke: var(--axis);
+}
+
+.axis .tick text {
+    fill: var(--ink-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
 }
 
 /* 散布図の点。同一日に複数プレイがあると点が完全に重なるため、
    半透明にして重なりを視認できるようにする */
 .dot {
-    fill: steelblue;
+    fill: var(--series);
     fill-opacity: 0.65;
-    stroke: steelblue;
+    stroke: var(--series);
     stroke-width: 1;
 }
 
 .dot:hover {
     fill-opacity: 1;
-    r: 5;
+    r: 5.5;
 }
 
 /* ホバー時のツールチップ（SVG 内に描画） */
@@ -26,11 +96,15 @@ iframe.twitter-share-button {
 }
 
 .tooltip rect {
-    fill: #1f2937;
-    fill-opacity: 0.9;
+    fill: var(--tooltip-bg);
+    stroke: var(--border);
 }
 
 .tooltip .tooltip-text {
-    fill: #fff;
+    fill: var(--tooltip-text);
     font-size: 12px;
+}
+
+.tooltip .tooltip-value {
+    font-weight: 600;
 }

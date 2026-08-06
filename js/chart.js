@@ -30,15 +30,20 @@
         // Keep only integer ticks so zooming never shows fractional indices
         const xAxis = (scale) => d3.axisBottom(scale)
             .tickValues(scale.ticks().filter(Number.isInteger))
-            .tickFormat(d3.format("d"));
+            .tickFormat(d3.format("d"))
+            .tickSizeOuter(0);
 
         // x scale reflecting the current zoom transform
         let zx = x;
 
-        /* Generate svg */
+        /* Generate svg. A viewBox (instead of fixed width/height) lets CSS
+           scale the chart down to the container width on narrow screens;
+           all internal coordinates stay in viewBox user units, so zoom and
+           tooltip math is unaffected. */
         const svgRoot = d3.select(config.selector).append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom);
+                    .attr("class", "chart-svg")
+                    .attr("viewBox", "0 0 " + (width + margin.left + margin.right) +
+                          " " + (height + margin.top + margin.bottom));
         const svg = svgRoot.append("g")
                     .attr("transform",
                           "translate(" + margin.left + "," + margin.top + ")");
@@ -50,6 +55,10 @@
             .append("rect")
             .attr("width", width)
             .attr("height", height);
+
+        // Gridline layer sits before the plot group so dots draw on top
+        const gridG = svg.append("g")
+            .attr("class", "grid");
 
         const plot = svg.append("g")
             .attr("clip-path", "url(#" + clipId + ")");
@@ -72,26 +81,32 @@
             const [yMin, yMax] = config.yDomain(data.map((d) => d.value));
             y.domain([yMin, yMax + (yMax - yMin) * 0.02]);
 
+            // Horizontal gridlines; y never zooms, so drawing once is enough
+            gridG.call(d3.axisLeft(y).tickSize(-width).tickFormat(() => ""));
+            gridG.select(".domain").remove();
+
             // Add the X Axis
             const xAxisG = svg.append("g")
+                .attr("class", "axis")
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis(x));
 
             // Add the Y Axis
             svg.append("g")
-                .call(d3.axisLeft(y));
+                .attr("class", "axis")
+                .call(d3.axisLeft(y).tickSizeOuter(0));
 
             /* Draw the dots */
             const dots = plot.selectAll("circle.dot")
                 .data(data)
                 .join("circle")
                 .attr("class", "dot")
-                .attr("r", 3.5)
+                .attr("r", 4)
                 .attr("cx", (d) => x(d.index))
                 .attr("cy", (d) => y(d.value));
 
-            /* Tooltip (SVG-based: the container div clips absolutely
-               positioned HTML because of overflow-x-auto) */
+            /* Tooltip (drawn inside the SVG so it scales with the viewBox
+               and never escapes the chart card) */
             const tooltip = svg.append("g")
                 .attr("class", "tooltip")
                 .style("display", "none");
@@ -99,7 +114,7 @@
                 .attr("rx", 4);
             const tooltipDate = tooltip.append("text").attr("class", "tooltip-text");
             const tooltipIndex = tooltip.append("text").attr("class", "tooltip-text");
-            const tooltipValue = tooltip.append("text").attr("class", "tooltip-text");
+            const tooltipValue = tooltip.append("text").attr("class", "tooltip-text tooltip-value");
 
             dots.on("mouseover", function (event, d) {
                 tooltipDate.text(formatDate(d.date));
