@@ -9,5 +9,5 @@ scatter({
     yDomain: (values) => [0, d3.max(values) + 20],
     format: d3.format("d"),
     xLabel: "plays",
-    yUnit: "misses"
+    yUnit: "keys"
 });
