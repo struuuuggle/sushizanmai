@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Preflight turns iframes into block elements; keep the Twitter share
+   button inline so text-center on its parent still centers it */
+iframe.twitter-share-button {
+    display: inline-block;
+}
+
+/* 折れ線グラフの線 */
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5;
+}
+
+.contribution svg {
+    margin-left: 64px;
+    margin-right: 64px;
+    height: 200px;
+}

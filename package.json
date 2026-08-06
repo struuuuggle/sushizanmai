@@ -1,0 +1,20 @@
+{
+  "name": "sushizanmai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Visualization of my Sushida (typing game) score records",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/struuuuggle/sushizanmai.git"
+  },
+  "homepage": "https://struuuuggle.github.io/sushizanmai/",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/input.css -o ./css/style.css --minify",
+    "watch:css": "tailwindcss -i ./css/input.css -o ./css/style.css --watch",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
