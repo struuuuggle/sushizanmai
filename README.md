@@ -13,24 +13,31 @@ npm install
 
 ## Local development
 
+Build the assets first, then serve the site over HTTP.
 The page fetches `data/score.csv`, so opening `index.html` directly via `file://` does not work.
-Serve the site over HTTP instead:
 
 ```sh
+npm run build   # generate css/style.css and js/vendor/d3.min.js
 npm run serve
 # → http://localhost:8000
 ```
 
 Local edits to the CSV are reflected by simply reloading the page.
 
-## CSS (Tailwind)
+## Build
 
-Styles are managed with Tailwind CSS v4. The source is `css/input.css`, and the build output is `css/style.css`.
-The build output is committed as well, so that GitHub Pages can serve it as-is.
+Build artifacts are not committed; they are generated both locally and in CI.
+
+- CSS is managed with Tailwind CSS v4. The source is `css/input.css`, and the build output is `css/style.css`.
+- d3 (v7) is managed with npm and vendored to `js/vendor/d3.min.js` at build time.
 
 ```sh
+npm run build       # build:css + build:js
 npm run build:css   # generate css/style.css from css/input.css
-npm run watch:css   # rebuild automatically while developing
+npm run build:js    # copy node_modules/d3/dist/d3.min.js to js/vendor/
+npm run watch:css   # rebuild CSS automatically while developing
 ```
 
-Whenever you change classes in `index.html` or edit `css/input.css`, run `npm run build:css` and commit the regenerated `css/style.css` together with your change.
+## Deployment
+
+Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds the assets, assembles the site into `dist/`, and deploys it to GitHub Pages.
