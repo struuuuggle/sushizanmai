@@ -58,9 +58,13 @@
                 d.value = config.value(d);
             });
 
-            /* Scale the range of the data */
-            x.domain(d3.extent(data, (d) => d.date));
-            y.domain(config.yDomain(data.map((d) => d.value)));
+            /* Scale the range of the data, padded slightly beyond the
+               extremes so dots on the edges aren't clipped by the plot area */
+            const [minDate, maxDate] = d3.extent(data, (d) => d.date);
+            const xPad = (maxDate - minDate) * 0.01;
+            x.domain([new Date(minDate - xPad), new Date(+maxDate + xPad)]);
+            const [yMin, yMax] = config.yDomain(data.map((d) => d.value));
+            y.domain([yMin, yMax + (yMax - yMin) * 0.02]);
 
             // Add the X Axis
             const xAxisG = svg.append("g")
