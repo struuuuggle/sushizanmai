@@ -6,9 +6,31 @@ iframe.twitter-share-button {
     display: inline-block;
 }
 
-/* 折れ線グラフの線 */
-.line {
-    fill: none;
+/* 散布図の点。同一日に複数プレイがあると点が完全に重なるため、
+   半透明にして重なりを視認できるようにする */
+.dot {
+    fill: steelblue;
+    fill-opacity: 0.65;
     stroke: steelblue;
-    stroke-width: 1.5;
+    stroke-width: 1;
+}
+
+.dot:hover {
+    fill-opacity: 1;
+    r: 5;
+}
+
+/* ホバー時のツールチップ（SVG 内に描画） */
+.tooltip {
+    pointer-events: none;
+}
+
+.tooltip rect {
+    fill: #1f2937;
+    fill-opacity: 0.9;
+}
+
+.tooltip .tooltip-text {
+    fill: #fff;
+    font-size: 12px;
 }
