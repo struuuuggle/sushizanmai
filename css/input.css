@@ -1,44 +1,36 @@
 @import "tailwindcss";
 
 /* Design tokens: role-based colors for the page and charts.
-   Light values are the default; dark values follow the OS setting
-   (no manual toggle). D3-generated SVG is styled with plain CSS,
+   Neutrals build on the UA's semantic system colors, which follow the OS
+   setting on their own once color-scheme is declared, so there is no second
+   set of values to keep in sync. CSS has no keyword for the intermediate
+   steps (card surface, gridline, muted ink), so color-mix() derives those
+   from the same two anchors. D3-generated SVG is styled with plain CSS,
    and the HTML references these via Tailwind's bg-(--token) syntax. */
 :root {
     color-scheme: light dark;
-    --page: #f9f9f7;
-    --surface: #fcfcfb;
-    --ink: #0b0b0b;
-    --ink-secondary: #52514e;
-    --ink-muted: #898781;
-    --grid: #e1e0d9;
-    --axis: #c3c2b7;
-    --border: rgba(11, 11, 11, 0.10);
-    --nav-bg: rgba(249, 249, 247, 0.85);
-    --series-keys: #2a78d6;
-    --series-speed: #eb6834;
-    --series-miss: #1baf7a;
-    --tooltip-bg: rgba(11, 11, 11, 0.92);
-    --tooltip-text: #fcfcfb;
-}
+    --page: Canvas;
+    --surface: color-mix(in oklab, Canvas 95%, CanvasText);
+    --ink: CanvasText;
+    --ink-secondary: color-mix(in oklab, CanvasText 75%, Canvas);
+    /* 55% is the lowest blend that clears 4.5:1 against the card in both
+       themes; the axis tick labels render at 12px. */
+    --ink-muted: color-mix(in oklab, CanvasText 55%, Canvas);
+    --grid: color-mix(in oklab, CanvasText 12%, Canvas);
+    --axis: color-mix(in oklab, CanvasText 30%, Canvas);
+    --border: color-mix(in oklab, CanvasText 15%, Canvas);
+    --nav-bg: color-mix(in srgb, Canvas 85%, transparent);
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --page: #0d0d0d;
-        --surface: #1a1a19;
-        --ink: #ffffff;
-        --ink-secondary: #c3c2b7;
-        --ink-muted: #898781;
-        --grid: #2c2c2a;
-        --axis: #383835;
-        --border: rgba(255, 255, 255, 0.10);
-        --nav-bg: rgba(13, 13, 13, 0.85);
-        --series-keys: #3987e5;
-        --series-speed: #d95926;
-        --series-miss: #199e70;
-        --tooltip-bg: #2c2c2a;
-        --tooltip-text: #ffffff;
-    }
+    /* The tooltip inverts against the page in light, but reads better as a
+       raised surface in dark, so the two themes differ by more than a mix. */
+    --tooltip-bg: light-dark(CanvasText, color-mix(in oklab, CanvasText 16%, Canvas));
+    --tooltip-text: light-dark(Canvas, CanvasText);
+
+    /* Categorical series have no semantic equivalent: three hues have to stay
+       distinguishable from each other, and each is tuned per theme. */
+    --series-keys: light-dark(#2a78d6, #3987e5);
+    --series-speed: light-dark(#eb6834, #d95926);
+    --series-miss: light-dark(#1baf7a, #199e70);
 }
 
 body {
