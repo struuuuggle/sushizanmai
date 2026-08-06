@@ -13,7 +13,7 @@
     "build:css": "tailwindcss -i ./css/input.css -o ./css/style.css --minify",
     "build:js": "mkdir -p js/vendor && cp node_modules/d3/dist/d3.min.js js/vendor/d3.min.js",
     "watch:css": "tailwindcss -i ./css/input.css -o ./css/style.css --watch",
-    "serve": "http-server -p 8000 -c-1"
+    "serve": "http-server -c-1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
