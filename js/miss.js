@@ -1,7 +1,9 @@
 // miss.js
-// ミスタイプ数のグラフを表示
+// Render the miss count graph.
 
-Sushizanmai.scatter({
+import { scatter } from "./chart.js";
+
+scatter({
     selector: ".miss",
     value: (d) => +d.miss,
     yDomain: (values) => [0, d3.max(values) + 20],

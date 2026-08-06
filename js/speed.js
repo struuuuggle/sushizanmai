@@ -1,7 +1,9 @@
 // speed.js
-// タイピング速度のグラフを表示
+// Render the typing speed graph.
 
-Sushizanmai.scatter({
+import { scatter } from "./chart.js";
+
+scatter({
     selector: ".speed",
     value: (d) => +d.speed,
     yDomain: (values) => [0, d3.max(values)],

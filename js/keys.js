@@ -1,7 +1,9 @@
 // keys.js
-// 正しく打ったキーの数のグラフを表示
+// Render the correctly-typed key count graph.
 
-Sushizanmai.scatter({
+import { scatter } from "./chart.js";
+
+scatter({
     selector: ".keys",
     value: (d) => +d.keys,
     yDomain: (values) => [0, d3.max(values)],
