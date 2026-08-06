@@ -29,7 +29,7 @@
                       "translate(" + margin.left + "," + margin.top + ")");
 
     // Load the data
-    d3.csv("./dat/score.csv").then(function(data) {
+    d3.csv("./data/score.csv").then(function(data) {
         /* format the data */
         data.forEach(function(d) {
             d.date = parseTime(d.date);

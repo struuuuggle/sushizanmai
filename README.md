@@ -14,7 +14,7 @@ git submodule update --init
 
 ## Local development
 
-`dat/score.csv` を fetch で読み込むため、`index.html` を `file://` で直接開いても動きません。
+`data/score.csv` を fetch で読み込むため、`index.html` を `file://` で直接開いても動きません。
 ローカル HTTP サーバ経由で開いてください。
 
 ```sh
