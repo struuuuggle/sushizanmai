@@ -13,9 +13,6 @@ npm install
 
 ## Local development
 
-Build the assets first, then serve the site over HTTP.
-The page fetches `data/score.csv`, so opening `index.html` directly via `file://` does not work.
-
 ```sh
 npm run build   # generate css/style.css and js/vendor/d3.min.js
 npm run dev
