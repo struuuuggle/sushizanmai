@@ -39,6 +39,17 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
+/* Nav icons drawn from images/ as a mask rather than <img>, so the glyph
+   inherits currentColor and keeps the link's hover and theme behaviour.
+   The url() is resolved against the generated css/style.css. */
+.icon-github {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: currentColor;
+    mask: url("../images/invertocat.svg") center / contain no-repeat;
+}
+
 /* Charts render in a fixed 1030x550 viewBox; scale to the card width */
 .chart-svg {
     width: 100%;
