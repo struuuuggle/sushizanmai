@@ -29,7 +29,7 @@
                       "translate(" + margin.left + "," + margin.top + ")");
 
     // Load the data
-    d3.csv("https://raw.githubusercontent.com/struuuuggle/sushizanmai/master/dat/score.csv").then(function(data) {
+    d3.csv("./dat/score.csv").then(function(data) {
 
         /* format the data */
         data.forEach(function(d) {
