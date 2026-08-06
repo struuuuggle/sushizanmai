@@ -2,37 +2,38 @@
 
 - You can see my typing skill improving.
 
-See also [寿司打](http://typing.sakura.ne.jp/sushida/index.html), one of the most famous typing games in Japan.
+See also [寿司打 (Sushida)](http://typing.sakura.ne.jp/sushida/index.html), one of the most famous typing games in Japan.
 
 ## Setup
 
 ```sh
 git clone --recursive https://github.com/struuuuggle/sushizanmai.git
-# クローン済みの場合は submodule だけ取得
+# If you have already cloned the repo, fetch the submodule:
 git submodule update --init
+
+npm install
 ```
 
 ## Local development
 
-`data/score.csv` を fetch で読み込むため、`index.html` を `file://` で直接開いても動きません。
-ローカル HTTP サーバ経由で開いてください。
+The page fetches `data/score.csv`, so opening `index.html` directly via `file://` does not work.
+Serve the site over HTTP instead:
 
 ```sh
-python3 -m http.server 8000   # または npm run serve
+npm run serve
 # → http://localhost:8000
 ```
 
-CSV をローカルで編集すると、リロードするだけで表示に反映されます。
+Local edits to the CSV are reflected by simply reloading the page.
 
 ## CSS (Tailwind)
 
-スタイルは Tailwind CSS v4 で管理しています。ソースは `css/input.css`、ビルド成果物が `css/style.css` です。
-GitHub Pages でそのまま配信するため、`css/style.css` もコミットします。
+Styles are managed with Tailwind CSS v4. The source is `css/input.css`, and the build output is `css/style.css`.
+The build output is committed as well, so that GitHub Pages can serve it as-is.
 
 ```sh
-npm install
-npm run build:css   # css/input.css → css/style.css を生成
-npm run watch:css   # 開発中はファイル監視で自動再生成
+npm run build:css   # generate css/style.css from css/input.css
+npm run watch:css   # rebuild automatically while developing
 ```
 
-`index.html` のクラスや `css/input.css` を変更したら、`npm run build:css` を実行して `css/style.css` を再生成し、あわせてコミットしてください。
+Whenever you change classes in `index.html` or edit `css/input.css`, run `npm run build:css` and commit the regenerated `css/style.css` together with your change.
