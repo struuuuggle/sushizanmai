@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>sushizammai</title>
-        <link rel="stylesheet" type="text/css" href="./lib/calendar-heatmap/src/calendar-heatmap.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
 
@@ -22,9 +21,6 @@
                     </li>
                     <li>
                         <a class="text-gray-400 pointer-events-none" href="#miss-graph">Miss</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-400 pointer-events-none" href="#contribution">Contribution</a>
                     </li>
                 </ul>
             </div>
@@ -57,10 +53,6 @@
                 <p>(スコア) =  0.01 * (type - miss) * speed</p>
             </div>
 
-            <div class="contribution overflow-x-auto scroll-mt-16" id="contribution">
-                <h3 class="text-xl font-semibold mt-8 mb-2">挑戦回数</h3>
-            </div>
-
             <footer class="my-8">
                 <p>
                     <img src="./images/bn.gif">
@@ -74,12 +66,9 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
 
         <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
-        <script src="./lib/calendar-heatmap/src/calendar-heatmap.js"></script>
         <script src="./js/type.js"></script>
         <script src="./js/speed.js"></script>
         <script src="./js/miss.js"></script>
         <script src="./js/score.js"></script>
-        <script src="./js/contribution.js"></script>
     </body>
 </html>

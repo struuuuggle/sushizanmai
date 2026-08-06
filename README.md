@@ -7,10 +7,7 @@ See also [寿司打 (Sushida)](http://typing.sakura.ne.jp/sushida/index.html), o
 ## Setup
 
 ```sh
-git clone --recursive https://github.com/struuuuggle/sushizanmai.git
-# If you have already cloned the repo, fetch the submodule:
-git submodule update --init
-
+git clone https://github.com/struuuuggle/sushizanmai.git
 npm install
 ```
 
