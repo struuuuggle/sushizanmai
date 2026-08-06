@@ -15,7 +15,7 @@
     --axis: #c3c2b7;
     --border: rgba(11, 11, 11, 0.10);
     --nav-bg: rgba(249, 249, 247, 0.85);
-    --series-type: #2a78d6;
+    --series-keys: #2a78d6;
     --series-speed: #eb6834;
     --series-miss: #1baf7a;
     --tooltip-bg: rgba(11, 11, 11, 0.92);
@@ -33,7 +33,7 @@
         --axis: #383835;
         --border: rgba(255, 255, 255, 0.10);
         --nav-bg: rgba(13, 13, 13, 0.85);
-        --series-type: #3987e5;
+        --series-keys: #3987e5;
         --series-speed: #d95926;
         --series-miss: #199e70;
         --tooltip-bg: #2c2c2a;
@@ -55,7 +55,7 @@ body {
 }
 
 /* Per-chart series color, resolved by .dot via var(--series) */
-.type  { --series: var(--series-type); }
+.keys  { --series: var(--series-keys); }
 .speed { --series: var(--series-speed); }
 .miss  { --series: var(--series-miss); }
 
@@ -74,6 +74,11 @@ body {
     fill: var(--ink-muted);
     font-size: 12px;
     font-variant-numeric: tabular-nums;
+}
+
+.axis-label {
+    fill: var(--ink-muted);
+    font-size: 12px;
 }
 
 /* 散布図の点。同一日に複数プレイがあると点が完全に重なるため、

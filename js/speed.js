@@ -4,6 +4,8 @@
 Sushizanmai.scatter({
     selector: ".speed",
     value: (d) => +d.speed,
-    yDomain: (values) => [4.0, d3.max(values)],
-    format: d3.format(".1f")
+    yDomain: (values) => [0, d3.max(values)],
+    format: d3.format(".1f"),
+    xLabel: "plays",
+    yUnit: "keys/sec"
 });

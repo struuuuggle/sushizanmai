@@ -12,14 +12,16 @@
      * Render a scatter plot with x-axis zoom/pan and hover tooltips.
      *
      * config = {
-     *   selector: ".type",                 // container div; also used for the clipPath id
-     *   value:    (d) => +d.type,          // CSV row -> y value
+     *   selector: ".keys",                 // container div; also used for the clipPath id
+     *   value:    (d) => +d.keys,          // CSV row -> y value
      *   yDomain:  (values) => [lo, hi],    // y values -> y domain
-     *   format:   d3.format("d")           // y value -> tooltip label
+     *   format:   d3.format("d"),          // y value -> tooltip label
+     *   xLabel:   "plays",                 // optional x-axis label
+     *   yUnit:    "keys"                   // optional y-axis unit label
      * }
      */
     function scatter(config) {
-        const margin = {top: 20, right: 20, bottom: 30, left: 50},
+        const margin = {top: 20, right: 20, bottom: 45, left: 50},
               width = 960,
               height = 500;
 
@@ -95,6 +97,27 @@
             svg.append("g")
                 .attr("class", "axis")
                 .call(d3.axisLeft(y).tickSizeOuter(0));
+
+            /* Axis labels: the x label sits below the tick labels at the
+               right edge, the y unit sits above the tick label column */
+            if (config.xLabel) {
+                svg.append("text")
+                    .attr("class", "axis-label")
+                    .attr("text-anchor", "end")
+                    .attr("x", width)
+                    .attr("y", height + 40)
+                    .text(config.xLabel);
+            }
+            if (config.yUnit) {
+                // Start-anchored at the SVG's left edge so long units
+                // ("keys/sec") aren't clipped by the left margin
+                svg.append("text")
+                    .attr("class", "axis-label")
+                    .attr("text-anchor", "start")
+                    .attr("x", -margin.left + 2)
+                    .attr("y", -8)
+                    .text(config.yUnit);
+            }
 
             /* Draw the dots */
             const dots = plot.selectAll("circle.dot")

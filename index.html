@@ -14,7 +14,7 @@
 
                 <ul class="flex flex-wrap items-center gap-x-4">
                     <li>
-                        <a class="text-(--ink-secondary) hover:text-(--ink)" href="#type-graph">Type</a>
+                        <a class="text-(--ink-secondary) hover:text-(--ink)" href="#keys-graph">Keys</a>
                     </li>
                     <li>
                         <a class="text-(--ink-secondary) hover:text-(--ink)" href="#speed-graph">Speed</a>
@@ -31,13 +31,13 @@
         <div class="mx-auto max-w-[1100px] px-4">
             <div class="text-center">
                 <h2 class="text-2xl sm:text-3xl font-bold tracking-tight my-4">寿司打(10000円コース)の記録</h2>
-                <p class="text-(--ink-secondary)"><a class="text-(--series-type) hover:underline" href="https://twitter.com/struuuuggle">@struuuuggle</a> の記録</p>
+                <p class="text-(--ink-secondary)"><a class="text-(--series-keys) hover:underline" href="https://twitter.com/struuuuggle">@struuuuggle</a> の記録</p>
             </div>
 
             <p class="text-xs text-(--ink-muted) mt-8 mb-2">⌘ / Ctrl + ホイールで横軸を拡大縮小・ドラッグで左右に移動・ダブルクリックでリセット</p>
 
-            <div class="type rounded-xl border border-(--border) bg-(--surface) p-4 sm:p-5 scroll-mt-16" id="type-graph">
-                <h3 class="text-lg font-semibold mb-2">総タイプ数(type)</h3>
+            <div class="keys rounded-xl border border-(--border) bg-(--surface) p-4 sm:p-5 scroll-mt-16" id="keys-graph">
+                <h3 class="text-lg font-semibold mb-2">正しく打ったキーの数(keys)</h3>
             </div>
 
             <div class="speed mt-8 rounded-xl border border-(--border) bg-(--surface) p-4 sm:p-5 scroll-mt-16" id="speed-graph">
@@ -62,7 +62,7 @@
 
         <script src="./js/vendor/d3.min.js"></script>
         <script src="./js/chart.js"></script>
-        <script src="./js/type.js"></script>
+        <script src="./js/keys.js"></script>
         <script src="./js/speed.js"></script>
         <script src="./js/miss.js"></script>
     </body>
