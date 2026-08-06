@@ -18,8 +18,8 @@ The page fetches `data/score.csv`, so opening `index.html` directly via `file://
 
 ```sh
 npm run build   # generate css/style.css and js/vendor/d3.min.js
-npm run serve
-# → http://localhost:8000
+npm run dev
+# → http://localhost:8080 (the actual URL is printed on startup)
 ```
 
 Local edits to the CSV are reflected by simply reloading the page.
