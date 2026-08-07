@@ -142,11 +142,23 @@ export function scatter(config) {
         const tooltipIndex = tooltip.append("text").attr("class", "tooltip-text");
         const tooltipValue = tooltip.append("text").attr("class", "tooltip-text tooltip-value");
 
-        dots.on("mouseover", function (event, d) {
+        /* The pointer only has to line up with a dot horizontally: the
+           nearest dot on the x axis wins, whatever the pointer's y.
+           Same approach as d3's "Line with Tooltip" example. */
+        const indexes = data.map((d) => d.index);
+        let pointer = null; // last pointer position in plot coordinates
+
+        function hideTooltip() {
+            tooltip.style("display", "none");
+            dots.classed("is-active", false);
+        }
+
+        function showTooltip(d) {
             tooltipDate.text(formatDate(d.date));
             tooltipIndex.text("No. " + d.index);
             tooltipValue.text(config.format(d.value));
             tooltip.style("display", null);
+            dots.classed("is-active", (p) => p === d);
 
             // Size the background to the widest of the three lines
             const dateBox = tooltipDate.node().getBBox();
@@ -167,10 +179,27 @@ export function scatter(config) {
             let ty = cy - boxH - 10;
             if (ty < 0) ty = cy + 10; // flip below near the top edge
             tooltip.attr("transform", "translate(" + tx + "," + ty + ")");
-        })
-        .on("mouseout", function () {
-            tooltip.style("display", "none");
-        });
+        }
+
+        // Re-run for the current pointer; also called after zoom/pan so
+        // the tooltip follows the dot that moved under the cursor
+        function updateTooltip() {
+            if (!pointer) return hideTooltip();
+            const [mx, my] = pointer;
+            // Ignore the margins, where the axes live
+            if (mx < 0 || mx > width || my < 0 || my > height) return hideTooltip();
+            showTooltip(data[d3.bisectCenter(indexes, zx.invert(mx))]);
+        }
+
+        svgRoot
+            .on("pointerenter pointermove", function (event) {
+                pointer = d3.pointer(event, svg.node());
+                updateTooltip();
+            })
+            .on("pointerleave", function () {
+                pointer = null;
+                updateTooltip();
+            });
 
         /* Zoom & pan (x-axis only) */
         const zoom = d3.zoom()
@@ -187,7 +216,7 @@ export function scatter(config) {
                 zx = event.transform.rescaleX(x);
                 xAxisG.call(xAxis(zx));
                 dots.attr("cx", (d) => zx(d.index));
-                tooltip.style("display", "none");
+                updateTooltip();
             });
 
         svgRoot.call(zoom);

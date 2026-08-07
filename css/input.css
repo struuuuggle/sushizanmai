@@ -93,7 +93,9 @@ body {
     stroke-width: 1;
 }
 
-.dot:hover {
+/* ツールチップ対象の点。ホバー判定は x 座標だけで行うため、
+   :hover ではなく JS が付けるクラスで強調する */
+.dot.is-active {
     fill-opacity: 1;
     r: 5.5;
 }
