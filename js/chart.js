@@ -25,7 +25,8 @@ const scores = d3.csv("./data/score.csv").then((rows) =>
  *   yDomain:  (values) => [lo, hi],    // y values -> y domain
  *   format:   d3.format("d"),          // y value -> tooltip label
  *   xLabel:   "plays",                 // optional x-axis label
- *   yUnit:    "keys"                   // optional y-axis unit label
+ *   yUnit:    "keys"                   // optional y-axis unit label,
+ *                                      // also shown in the tooltip
  * }
  */
 export function scatter(config) {
@@ -156,7 +157,8 @@ export function scatter(config) {
         function showTooltip(d) {
             tooltipDate.text(formatDate(d.date));
             tooltipIndex.text("No. " + d.index);
-            tooltipValue.text(config.format(d.value));
+            tooltipValue.text(config.format(d.value) +
+                (config.yUnit ? " (" + config.yUnit + ")" : ""));
             tooltip.style("display", null);
             dots.classed("is-active", (p) => p === d);
 
