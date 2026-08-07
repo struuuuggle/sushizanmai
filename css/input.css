@@ -14,7 +14,8 @@
     --ink: CanvasText;
     --ink-secondary: color-mix(in oklab, CanvasText 75%, Canvas);
     /* 55% is the lowest blend that clears 4.5:1 against the card in both
-       themes; the axis tick labels render at 12px. */
+       themes; the axis tick labels render at 14px, still below the
+       large-text threshold that would allow 3:1. */
     --ink-muted: color-mix(in oklab, CanvasText 55%, Canvas);
     --grid: color-mix(in oklab, CanvasText 12%, Canvas);
     --axis: color-mix(in oklab, CanvasText 30%, Canvas);
@@ -73,15 +74,17 @@ body {
     stroke: var(--axis);
 }
 
+/* 14px in viewBox units: the SVG scales to the card width, so this is the
+   floor that stays legible once a phone shrinks the whole chart */
 .axis .tick text {
     fill: var(--ink-muted);
-    font-size: 12px;
+    font-size: 14px;
     font-variant-numeric: tabular-nums;
 }
 
 .axis-label {
     fill: var(--ink-muted);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /* 散布図の点。同一日に複数プレイがあると点が完全に重なるため、
