@@ -27,6 +27,14 @@
     --tooltip-bg: light-dark(CanvasText, color-mix(in oklab, CanvasText 16%, Canvas));
     --tooltip-text: light-dark(Canvas, CanvasText);
 
+    /* Accent surface for the latest-record banner. Indigo, deliberately off
+       the three series hues so the band reads as chrome rather than as one
+       of the graphs. Both steps are dark enough that white ink clears AA
+       (7.5:1 light, 10.3:1 dark), and 85% white still clears 4.5:1. */
+    --accent: light-dark(#2f4bb8, #2a3a86);
+    --on-accent: #ffffff;
+    --on-accent-muted: rgb(255 255 255 / 0.85);
+
     /* Categorical series have no semantic equivalent: three hues have to stay
        distinguishable from each other, and each is tuned per theme. */
     --series-keys: light-dark(#2a78d6, #3987e5);

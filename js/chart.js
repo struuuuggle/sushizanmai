@@ -6,9 +6,9 @@ const parseTime = d3.timeParse("%Y%m%d");
 const formatDate = d3.timeFormat("%Y/%m/%d");
 
 /* Fetch and parse the CSV once; every chart shares this promise. The
-   resulting rows are shared across charts, so scatter() must not mutate
-   them. */
-const scores = d3.csv("./data/score.csv").then((rows) =>
+   resulting rows are shared across consumers, so nobody may mutate them.
+   Exported so non-chart views (see latest.js) reuse the same fetch. */
+export const scores = d3.csv("./data/score.csv").then((rows) =>
     rows.map((d, i) => ({
         ...d,
         date: parseTime(d.date),
