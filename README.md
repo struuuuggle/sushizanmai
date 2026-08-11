@@ -37,4 +37,4 @@ npm run watch:css   # rebuild CSS automatically while developing
 
 ## Deployment
 
-Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds the assets, assembles the site into `dist/`, and deploys it to GitHub Pages.
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the assets, assembles the site into `dist/`, and deploys it to GitHub Pages.
